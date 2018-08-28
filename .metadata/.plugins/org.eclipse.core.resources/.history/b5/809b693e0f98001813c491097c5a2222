@@ -1,0 +1,8 @@
+package br.com.glauber.dao;
+
+import br.com.glauber.entidades.Locacao;
+
+public interface LocacaoDAO {
+
+	public void salvar(Locacao locacao);
+}

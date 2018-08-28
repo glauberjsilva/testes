@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="Rerun 1 + 1 = 2" project="junit5-jupiter-starter-maven" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.example.project.CalculatorTests" time="0.015" displayname="CalculatorTests" uniqueid="[engine:junit-jupiter]/[class:com.example.project.CalculatorTests]">
+    <testcase name="addsTwoNumbers" classname="com.example.project.CalculatorTests" time="0.015" displayname="1 + 1 = 2" uniqueid="[engine:junit-jupiter]/[class:com.example.project.CalculatorTests]/[method:addsTwoNumbers()]"/>
+  </testsuite>
+</testrun>

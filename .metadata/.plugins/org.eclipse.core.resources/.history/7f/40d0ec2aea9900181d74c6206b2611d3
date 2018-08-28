@@ -1,0 +1,28 @@
+package br.com.glauber.servicos;
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+
+public class CalculadoraMockArgumentCaptor {
+
+	@Mock
+	private CalculadoraService CalculadoraMock;
+	
+	private CalculadoraService calculadoraSpy
+	
+	@Test
+	public void teste() {
+		CalculadoraService calc = Mockito.mock(CalculadoraService.class);
+
+		ArgumentCaptor<Integer> argCapt = ArgumentCaptor.forClass(Integer.class);
+		Mockito.when(calc.somar(argCapt.capture(), argCapt.capture())).thenReturn(5);
+		
+		Assert.assertEquals(5, calc.somar(1, 1000));
+	
+		// Imprime os valores passados no método cal.somar(1, 1000)
+		System.out.println(argCapt.getAllValues());
+	}
+}

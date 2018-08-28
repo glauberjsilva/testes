@@ -1,0 +1,7 @@
+package br.com.glauber.servicos;
+
+public interface EmailService {
+
+	public void notificarAtraso() {
+}
+}

@@ -1,0 +1,33 @@
+import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import br.ce.wcaquino.entidades.Filme;
+import br.ce.wcaquino.entidades.Locacao;
+import br.ce.wcaquino.entidades.Usuario;
+import br.ce.wcaquino.servicos.LocacaoService;
+
+public class init {
+
+	public static void main(String[] args) {
+
+		LocacaoService service = new LocacaoService()
+		Usuario usuario = new Usuario("Usuario 1");
+		Filme filme = new Filme("Guerra nas estrelas", 1, 10.00d);
+		
+		Loccao locacao = service.alugarFilme(usuario, filme);
+		
+		String nomeFilme = locacao.getFilme().getNome();
+		Date dataLocacao = locacao.getDataLocacao();
+		Date dataRetorno = locacao.getDataRetorno();
+		Double valor = locacao.getValor();
+
+		System.out.format("Nome do filme correto: " + (filme.getNome().equalsIgnoreCase(locacao.getFilme().getNome()) ? true : false));
+		System.out.format("\nValor do filme %s --- Valor do filme locação %s", filme.getPrecoLocacao(), locacao.getValor());
+		System.out.format("\nData da locação %s --- Dagta do Retorno %s", new SimpleDateFormat("dd/MM/yyyy").format(locacao.getDataLocacao()),
+				new SimpleDateFormat("dd/MM/yyyy").format(locacao.getDataRetorno()));
+
+	}
+
+}

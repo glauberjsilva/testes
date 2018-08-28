@@ -1,0 +1,3 @@
+INDEX VERSION 1.131
+D:\Desenvolvimento\Projetos\workspace_estudos\workspace_teste_udemy\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4069574172.index
+\com.glauber.junit\src\main\resources

@@ -1,0 +1,8 @@
+package br.com.glauber.servicos;
+
+import br.com.glauber.builder.UsuarioBuilder;
+
+public interface SPCService {
+	
+	public boolean possuiNegativaco(Usuario usuario);
+}

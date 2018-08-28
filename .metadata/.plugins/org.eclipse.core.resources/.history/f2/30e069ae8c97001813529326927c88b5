@@ -1,0 +1,34 @@
+package br.com.glauber.matchers;
+
+import java.util.Date;
+
+import org.hamcrest.Description;
+import org.hamcrest.TypeSafeMatcher;
+
+public class DiaSemanaMatcher extends TypeSafeMatcher {
+
+	private Integer diaSemana;
+	
+	public diaSemanaMatcher(Integer diaSemana) {
+		this.diaSemana = diaSemana;
+	}
+	
+	@Override
+	public void describeTo(Description description) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected boolean matchesSafely(Date item) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected boolean matchesSafely(Object item) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

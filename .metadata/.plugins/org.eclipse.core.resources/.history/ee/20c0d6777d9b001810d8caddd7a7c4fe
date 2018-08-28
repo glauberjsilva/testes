@@ -1,0 +1,5 @@
+package com.exemple.exceptions;
+
+public class CalculatorException extends Exception {
+
+}

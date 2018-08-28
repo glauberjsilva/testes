@@ -1,0 +1,39 @@
+package br.com.glauber.servicos;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import br.com.glauber.entidades.Calculadora;
+
+public class CalculadoraTest {
+	
+	@Test
+	public void deveSomarDoisValores() {
+		// Cenário
+		int a = 5;
+		int b = 3;
+		Calculadora calc = new Calculadora();
+		
+		// Ação
+		int resultado = calc.somar(a, b);
+		
+		//Verificação
+		Assert.assertEquals(8, resultado);
+	}
+	
+	public void deveSubtrairDoisValores() {
+		// Cenário
+		int a = 5;
+		int b = 2;
+		
+		Calculadora calc = new Calculadora();
+		
+		// Ação
+		int resultado = calc.subtracao(a, b);
+		
+		//Verificação
+		Assert.assertEquals(3, resultado);
+	}
+	}
+
+}

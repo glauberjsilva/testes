@@ -1,0 +1,21 @@
+package br.com.glauber.servicos;
+
+import org.junit.Before;
+import org.mockito.Mockito;
+
+public class CalculadoraMockTest {
+
+	private CalculadoraService calc;
+	
+	@Before
+	public void setup() {
+		calc = new CalculadoraService();
+	}
+	
+	public void teste() {
+		CalculadoraService calc = Mockito.mock(CalculadoraService.class);
+		Mockito.when(calc.somar(1, 2)).thenReturn(5);
+		
+		System.out.println(calc.somar(1, 2));
+	}
+}

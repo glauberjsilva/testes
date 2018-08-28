@@ -1,0 +1,35 @@
+package br.com.glauber.builder;
+
+import br.com.glauber.entidades.Usuario;
+
+/**
+ * Usando Padrão de Projetos DataBuilder e Chaining Método que permite realizar
+ * o encadimento de métodos
+ * 
+ * @author Glauber
+ *
+ */
+public class UsuarioBuilder {
+
+	private Usuario usuario;
+
+	private UsuarioBuilder() {
+	}
+
+	public static UsuarioBuilder umUsuario() {
+		UsuarioBuilder builder = new UsuarioBuilder();
+		builder.usuario = new Usuario();
+		builder.usuario.setNome("Usuário 1");
+		return builder;
+	}
+
+	public UsuarioBuilder comNome() {
+
+		return this;
+	}
+
+	public Usuario agora() {
+		return usuario;
+	}
+
+}

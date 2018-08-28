@@ -1,0 +1,21 @@
+package br.com.glauber.builder;
+
+import br.com.glauber.entidades.Usuario;
+
+public class UsuarioBuilder {
+	
+	private Usuario usuario;
+	private UsuarioBuilder() {}
+	
+	private static UsuarioBuilder umUsuario() { 
+		UsuarioBuilder builder = new UsuarioBuilder();
+		builder.usuario = new Usuario();
+		builder.usuario.setNome("Usuário 1");
+		return builder;
+	}
+	
+	public Usuario agora() {
+		return usuario;
+	}
+	
+}

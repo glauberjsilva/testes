@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="CalculatorTest.deveLancarExcecaoAoDividirPorZero2" project="teste-junit5" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.glauber.junit5.service.CalculatorTest" time="0.008" displayname="Calculadora Test JUnit5" uniqueid="[engine:junit-jupiter]/[class:com.glauber.junit5.service.CalculatorTest]">
+    <testcase name="deveLancarExcecaoAoDividirPorZero2" classname="com.glauber.junit5.service.CalculatorTest" time="0.008" displayname="deveLancarExcecaoAoDividirPorZero2()" uniqueid="[engine:junit-jupiter]/[class:com.glauber.junit5.service.CalculatorTest]/[method:deveLancarExcecaoAoDividirPorZero2()]"/>
+  </testsuite>
+</testrun>

@@ -1,0 +1,9 @@
+package br.com.glauber.servicos;
+
+import br.com.glauber.entidades.Locacao;
+
+public interface EmailService {
+
+	public void notificarAtraso(Locacao locacao);
+
+}

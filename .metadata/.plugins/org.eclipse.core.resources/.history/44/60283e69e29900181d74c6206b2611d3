@@ -1,0 +1,23 @@
+package br.com.glauber.servicos;
+
+import org.junit.Test;
+import org.mockito.Mockito;
+
+public class CalculadoraMockTest {
+
+	@Test
+	public void teste() {
+		CalculadoraService calc = Mockito.mock(CalculadoraService.class);
+		
+		// Quando o somar da calculador passando 1 e 2 for chamado retorne 5
+		Mockito.when(calc.somar(1, 2)).thenReturn(5);
+		
+		// Quando o somar for chamado passado qualquer inteiro, retorne 5
+		Mockito.when(calc.somar(Mockito.anyInt(), Mockito.anyInt())).thenReturn(5);
+	
+		// Quando fizer a soma de algo igual a 1 e qualuer inteiro, retorne 5
+		Mockito.when(calc.somar(Mockito.eq(1), Mockito.anyInt())).thenReturn(5);
+		
+		System.out.println(calc.somar(1, 2));
+	}
+}

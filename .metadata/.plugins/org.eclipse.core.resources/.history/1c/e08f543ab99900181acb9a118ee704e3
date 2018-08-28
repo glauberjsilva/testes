@@ -1,0 +1,181 @@
+
+package br.com.glauber.servicos;
+
+import static br.com.glauber.builder.FilmeBuilder.umFilme;
+import static br.com.glauber.builder.FilmeBuilder.umFilmeSemEstoque;
+import static br.com.glauber.builder.LocacaoBuilder.umaLocacao;
+import static br.com.glauber.builder.UsuarioBuilder.umUsuario;
+import static br.com.glauber.matchers.MatchersProprios.caiNumaSegundaFeira;
+import static br.com.glauber.matchers.MatchersProprios.ehHoje;
+import static br.com.glauber.matchers.MatchersProprios.ehHojeComDiferencaDias;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import org.hamcrest.CoreMatchers;
+import org.junit.Assert;
+import org.junit.Assume;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ErrorCollector;
+import org.junit.rules.ExpectedException;
+import org.mockito.Mockito;
+import org.mockito.internal.verification.AtLeast;
+
+import br.com.glauber.dao.LocacaoDAO;
+import br.com.glauber.entidades.Filme;
+import br.com.glauber.entidades.Locacao;
+import br.com.glauber.entidades.Usuario;
+import br.com.glauber.exceptions.FilmeSemEstoqueException;
+import br.com.glauber.exceptions.LocadoraException;
+import br.com.glauber.utils.DataUtils;
+
+
+public class LocacaoTest5_Mockito {
+	
+	private LocacaoService service;
+	private SPCService SPCService;
+	private EmailService emailService;
+	private LocacaoDAO dao;
+	
+	@Rule
+	public ErrorCollector error = new ErrorCollector();
+	@Rule
+	public ExpectedException exception = ExpectedException.none();
+
+	@Before
+	public void setup() {
+		this.service = new LocacaoService();
+		
+		/* Subistituindo  LocacaoDAO dao = new LocacaoDAOFake();  por Mock */
+		this.dao = Mockito.mock(LocacaoDAO.class);
+		this.service.setLocacaoDAO(dao);
+		
+		
+		this.SPCService = Mockito.mock(SPCService.class);
+		this.service.setSPCService(SPCService);
+		
+		this.emailService = Mockito.mock(EmailService.class);
+		this.service.setEmailService(emailService);
+	}
+
+	@Test
+	public void deveAlugarFilmeComSucesso() throws Exception {
+
+		Assume.assumeFalse(DataUtils.verificarDiaSemana(new Date(), Calendar.SATURDAY)); 
+		
+		// Cenário
+		Usuario usuario = umUsuario().agora();
+		List<Filme> filmes = Arrays.asList(umFilme().comValor(10.00d).agora());
+
+		// Ação
+		Locacao locacao = service.alugarFilme(usuario, filmes);
+		
+		// Verificação
+		error.checkThat(locacao.getValor(), is(equalTo(10.00d)));
+		error.checkThat(locacao.getDataLocacao(), ehHoje()); 
+		error.checkThat(locacao.getDataRetorno(), ehHojeComDiferencaDias(1)); 
+	}
+
+	@Test(expected = FilmeSemEstoqueException.class)
+	public void naoDeveAlugarFilmeSemEstoque() throws Exception {
+		// cenario
+		Usuario usuario = umUsuario().agora();
+		List<Filme> filmes = Arrays.asList(umFilmeSemEstoque().agora());
+		// outra forma de obter um filme --> List<Filme> filmes = Arrays.asList(umFilme().semEstoque().agora());
+
+		// Ação
+		service.alugarFilme(usuario, filmes);
+	}
+
+	@Test
+	public void naoDeveAlugarFilmeSemUsuario() throws FilmeSemEstoqueException {
+		// Cenário
+		List<Filme> filmes = Arrays.asList(umFilme().agora());
+
+		try {
+			// Ação
+			service.alugarFilme(null, filmes);
+			Assert.fail(); 
+		} catch (LocadoraException e) {
+			Assert.assertThat(e.getMessage(), CoreMatchers.is("Usuário vazio"));
+		}
+	}
+
+	@Test
+	public void naoDeveAlugarFilmeSemFilme() throws FilmeSemEstoqueException, LocadoraException {
+		// Cenário
+		Usuario usuario = umUsuario().agora();
+		
+		// Exception deve ficar antes da ação (chamada do método alugarFilmes)
+		exception.expect(LocadoraException.class);
+		exception.expectMessage("Filme vazio");
+
+		// Ação
+		this.service.alugarFilme(usuario, null);
+	}
+
+	@Test
+	public void deveDevolverNaSegundaAoAlugarNoSabado() throws FilmeSemEstoqueException, LocadoraException {
+		Assume.assumeTrue(DataUtils.verificarDiaSemana(new Date(), Calendar.SATURDAY));
+		
+		// Cenário
+		Usuario usuario = umUsuario().agora();
+
+		List<Filme> filmes = Arrays.asList(	umFilme().agora());
+		
+		// Ação
+		Locacao retorno = service.alugarFilme(usuario, filmes);
+		
+		// Verificação
+		Assert.assertThat(retorno.getDataRetorno(),  caiNumaSegundaFeira());
+	}
+	
+	@Test
+	public void naoDeveAlugarFilmeParaNegativadoSPC() throws FilmeSemEstoqueException, LocadoraException {
+		// Cenário
+		Usuario usuario = umUsuario().agora();
+		List<Filme> filmes = Arrays.asList(	umFilme().agora());
+
+		Mockito.when(SPCService.possuiNegativacao(usuario)).thenReturn(true);
+		//Alterando o comportamento do método para seja thenReturn(true) e assim lançar a execeção ao verificar negativação no SPC
+		
+		exception.expect(LocadoraException.class);
+		exception.expectMessage("Usuário negativado");
+
+		// Ação
+		service.alugarFilme(usuario, filmes);
+	}
+	
+	@Test
+	public void deveEnviarNotificacaoParaLocacoesAtrasadas() {
+		// Cenário
+		Usuario usuario = umUsuario().agora();
+		Usuario usuario2 = umUsuario().comNome("Um usuário em dia.").agora();
+		Usuario usuario3 = umUsuario().comNome("Outro usuário atrasado").agora();
+		List<Locacao> locacoes = Arrays.asList(
+				umaLocacao().comUsuario(usuario).atrasado().agora(),
+				umaLocacao().comUsuario(usuario2).agora(),
+				umaLocacao().comUsuario(usuario3).atrasado().agora());
+		
+		Mockito.when(dao.ObterLocacoesPendentes()).thenReturn(locacoes);
+		
+		// Ação
+		service.notificarAtrasos();
+		
+		// Verificação
+		Mockito.verify(emailService).notificarAtraso(usuario);
+		Mockito.verify(emailService).notificarAtraso(usuario3);
+		Mockito.verify(emailService, Mockito.atLeast()).notificarAtraso(usuario3); // verifica que foi enviado pelo menos um e-mail
+		Mockito.verify(emailService, Mockito.never()).notificarAtraso(usuario2); //deve falhar pois o usuario2 não está atrasado
+		Mockito.verifyNoMoreInteractions(emailService); // nada mais deve acontecer ou seja mais nenhuma interessação em emailService
+		//Mockito.verifyZeroInteractions(emailService);  para verificar que não houve nenhuma interação na classe emailService
+		
+	}
+}
+

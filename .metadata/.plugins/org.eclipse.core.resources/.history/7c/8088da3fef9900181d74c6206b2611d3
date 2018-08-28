@@ -1,0 +1,47 @@
+package br.com.glauber.servicos;
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+
+public class CalculadoraMockSpy {
+
+	@Mock
+	private CalculadoraService calcMock;
+	
+	@Spy
+	private CalculadoraService calcSpy;
+	
+	@Before
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
+	}
+	
+	@Test
+	public void devoMostrarDiferencaEntreMockSpy() {
+		Mockito.when(calcMock.somar(1, 2)).thenReturn(8);
+		Mockito.when(calcSpy.somar(1, 2)).thenReturn(8);
+		
+		System.out.println("\n devoMostrarDiferencaEntreMockSpy #################################################################################");
+		System.out.println("Mock: " +  calcMock.somar(1, 2) + "  ==> Imprime o valor definido como retorno (8) - thenReturn(8)");
+		System.out.println("Spy: " + calcSpy.somar(1, 2) + "  ==> Imprime o valor definido como retorno (8) - thenReturn(8)");
+		System.out.println("Mock: " +  calcMock.somar(1, 5) + "  ==> Imprime o valor padrão de um inteiro");
+		System.out.println("Spy: " + calcSpy.somar(1, 5) + "  ==> Imprime o resultado da execução do método");
+	}
+	
+	@Test
+	public void devoMostrarDiferencaEntreMockSpy2() {
+		Mockito.when(calcMock.somar(1, 2)).thenCallRealMethod(); // Chama a implementação real do método
+		Mockito.when(calcSpy.somar(1, 2)).thenReturn(8);
+		System.out.println("\n devoMostrarDiferencaEntreMockSpy2 ##########################################");
+		System.out.println("Mock2: " +  calcMock.somar(1, 2) + "  ==> Imprimiu o resultado da execução do método");
+		System.out.println("Spy2: " + calcSpy.somar(1, 2) + "  ==> Imprime o valor definido como retorno (8) - thenReturn(8)");
+		System.out.println("Mock2: " +  calcMock.somar(1, 5) + "  ==> Quando não sabe imprime o valor padrão de um inteiro");
+		System.out.println("Spy2: " + calcSpy.somar(1, 5) + "  ==> Imprimiu o resultado da execução do método");
+	}
+}

@@ -1,0 +1,85 @@
+package br.com.glauber.servicos;
+
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.core.Is;
+import org.hamcrest.core.IsEqual;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+import br.com.glauber.exceptions.NaoPodeDividirPorZeroException;
+
+public class CalculadoraTest {
+
+	private CalculadoraService calc;
+	
+	@Before
+	public void setup() {
+		calc = new CalculadoraService();
+	}
+	
+	@Test
+	public void deveSomarDoisValores() {
+		// Cenário
+		int a = 5;
+		int b = 3;
+
+		// Ação
+		int resultado = calc.somar(a, b);
+
+		// Verificação
+		Assert.assertEquals(8, resultado);
+	}
+
+	@Test
+	public void deveSubtrairDoisValores() {
+		// Cenário
+		int a = 5;
+		int b = 2;
+
+		// Ação
+		int resultado = calc.subtracao(a, b);
+
+		// Verificação
+		Assert.assertEquals(3, resultado);
+	}
+
+	@Test
+	public void deveDividirDoisValores() throws NaoPodeDividirPorZeroException {
+		// Cenário
+		int a = 6;
+		int b = 3;
+
+		// Ação
+		int resultado = calc.divisao(a, b);
+
+		// Verificação
+		Assert.assertEquals(2, resultado);
+	}
+
+	
+	//Lança NaoPodeDividirPorZeroException pois neste caso de teste a exceção é gerenciado pelo JUnit
+	@Test(expected = NaoPodeDividirPorZeroException.class)
+	public void deveLançarExcecaoAoDividirPorZero() throws NaoPodeDividirPorZeroException {
+		// Cenário
+		int a = 10;
+		int b = 0;
+
+		// Ação
+		int resultado = calc.divisao(a, b);
+
+		// Verificação
+		Assert.assertEquals(2, resultado);
+	}
+	
+	@Test
+	public void deveDividir() {
+		String a = "6";
+		String b = "2";
+		
+		int resultado = calc.divide(a, b);
+		
+		//Assert.assertEquals(3, 3);
+		Assert.assertThat(3, CoreMatchers.is(CoreMatchers.equalTo(3)));
+	}
+}

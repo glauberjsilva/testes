@@ -1,0 +1,13 @@
+package com.glauber.junit5.service;
+
+import com.glauber.junit5.exceptions.CalculatorException;
+
+public class Calculator {
+
+	public int divide(int a, int b) throws CalculatorException {
+		if(b == 0)
+			throw new CalculatorException("Não pode dividir por zero");
+		return a + b;
+	}
+
+}

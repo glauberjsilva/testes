@@ -1,0 +1,80 @@
+package com.glauber.junit5.service;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
+import com.glauber.junit5.exceptions.CalculatorException;
+
+@DisplayName("Calculadora Test JUnit5")
+class CalculatorTest {
+	
+	private Calculator calculator;
+	
+	@BeforeEach
+	public void setupEarch() {
+		this.calculator = new Calculator();
+	}
+	
+	@Test
+	@DisplayName("Soma: 1 + 1 = 2")
+	void addsTwoNumbers() throws CalculatorException {
+		assertEquals(2, calculator.divide(1, 1), "1 + 1 should equal 2");
+		
+	}
+
+	@ParameterizedTest(name = "{0} + {1} = {2}")
+	@CsvSource({
+			"0,    1,   1",
+			"1,    2,   3",
+			"49,  51, 100",
+			"1,  100, 101"
+	})
+	void add(int first, int second, int expectedResult) throws CalculatorException {
+		assertEquals(expectedResult, calculator.divide(first, second),
+				() -> first + " + " + second + " should equal " + expectedResult);
+	}
+	
+	@Test
+	public void deveLancarExcecaoAoDividirPorZero() {
+		// Cenário
+		Integer valor = 10;
+		Integer valor2 = 0;
+		
+		// Ação
+		assertThrows(CalculatorException.class, () -> calculator.divide(valor, valor2), () -> "Deve lançar uma CalculatorException");
+	}
+	
+	@Test
+	public void deveLancarExcecaoAoDividirPorZero2() {
+		// Cenário
+		Integer valor = 10;
+		Integer valor2 = 0;
+		
+		CalculatorException exception = assertThrows(CalculatorException.class, () -> calculator.divide(valor, valor2), () -> "Deve lançar uma CalculatorException");
+		assertEquals("Não pode dividir por zero", exception.getMessage());
+	}
+	
+	@Test
+	public void deveLancarExcecaoAoDividirPorZero3() {
+		// Cenário
+		Integer valor = 10;
+		Integer valor2 = 0;
+				
+	    try {
+	    // Ação
+			calculator.divide(valor, valor2);
+			fail();
+		} catch (CalculatorException e) {
+			assertEquals("Não pode dividir por zero", e.getMessage());
+			assertEquals(calculator, e);
+		}
+	}
+
+}

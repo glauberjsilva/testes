@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="java (1)" project="junit5-jupiter-starter-maven" tests="5" started="5" failures="0" errors="0" ignored="0">
+  <testsuite name="com.example.project.CalculatorTests" time="0.078" displayname="CalculatorTests" uniqueid="[engine:junit-jupiter]/[class:com.example.project.CalculatorTests]">
+    <testcase name="addsTwoNumbers" classname="com.example.project.CalculatorTests" time="0.047" displayname="1 + 1 = 2" uniqueid="[engine:junit-jupiter]/[class:com.example.project.CalculatorTests]/[method:addsTwoNumbers()]"/>
+    <testsuite name="add(com.example.project.CalculatorTests)" time="0.031" displayname="add(int, int, int)" parameters="int,int,int" uniqueid="[engine:junit-jupiter]/[class:com.example.project.CalculatorTests]/[test-template:add(int, int, int)]">
+      <testcase name="add" classname="com.example.project.CalculatorTests" time="0.031" dynamicTest="true" displayname="0 + 1 = 1" parameters="int,int,int" uniqueid="[engine:junit-jupiter]/[class:com.example.project.CalculatorTests]/[test-template:add(int, int, int)]/[test-template-invocation:#1]"/>
+      <testcase name="add" classname="com.example.project.CalculatorTests" time="0.0" dynamicTest="true" displayname="1 + 2 = 3" parameters="int,int,int" uniqueid="[engine:junit-jupiter]/[class:com.example.project.CalculatorTests]/[test-template:add(int, int, int)]/[test-template-invocation:#2]"/>
+      <testcase name="add" classname="com.example.project.CalculatorTests" time="0.0" dynamicTest="true" displayname="49 + 51 = 100" parameters="int,int,int" uniqueid="[engine:junit-jupiter]/[class:com.example.project.CalculatorTests]/[test-template:add(int, int, int)]/[test-template-invocation:#3]"/>
+      <testcase name="add" classname="com.example.project.CalculatorTests" time="0.0" dynamicTest="true" displayname="1 + 100 = 101" parameters="int,int,int" uniqueid="[engine:junit-jupiter]/[class:com.example.project.CalculatorTests]/[test-template:add(int, int, int)]/[test-template-invocation:#4]"/>
+    </testsuite>
+  </testsuite>
+</testrun>

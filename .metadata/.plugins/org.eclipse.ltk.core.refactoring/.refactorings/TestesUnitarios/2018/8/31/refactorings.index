@@ -1,0 +1,45 @@
+1533090079253	Copy compilation unit
+1533090095854	Delete element
+1533091564928	Rename compilation unit 'init.java'
+1533091698217	Delete element
+1533091849243	Delete element
+1533093648663	Rename package 'br.com.glauber.test'
+1533094025641	Rename package 'br.ce.wcaquino.servicos'
+1533094091497	Rename package 'com.glauber.servicos'
+1533098299454	Rename method 'validarLocacao'
+1533101207129	Delete element
+1533101812139	Rename package 'br.ce.wcaquino.utils'
+1533101828346	Rename package 'br.com.glauber'
+1533101845345	Rename package 'br.ce.wcaquino.entidades'
+1533101856946	Delete element
+1533101860163	Delete element
+1533102790887	Rename method 'testLocacao_filmeSemEstoque'
+1533102811542	Rename method 'testLocacao_filmeSemEstoque_formaElegante'
+1533102863706	Rename method 'testLocacao_filmeSemEstoque_2'
+1533150705970	Rename field 'filme'
+1533152908100	Copy compilation unit
+1533152910996	Copy compilation unit
+1533152917757	Delete elements
+1533154067836	Rename field 'Calculadora'
+1533154082724	Rename field 'calculadora'
+1533172412025	Rename local variable 'valorDesconto'
+1533174598210	Extract method 'calcularValorTotal'
+1533179015739	Rename local variable 'valorLocacao'
+1533255412640	Copy compilation unit
+1533260541126	Extract method 'calcularValorLocacao'
+1533348680244	Rename type 'LocacaoTestRefatorada'
+1533348685940	Copy compilation unit
+1533348979014	Move compilation unit
+1533353306098	Rename type 'DiferencaDiasMatcher'
+1533353318712	Rename type 'DiaSemanaMatcher'
+1533182499495	Rename type 'LocacaoTest3'
+1533182513841	Copy compilation unit
+1533182638283	Rename type 'LocacaoTest3_UsandoBuilder'
+1533303219757	Copy compilation unit
+1533347934806	Delete element
+1533347943165	Move compilation unit
+1533347962765	Rename type 'Calculadora'
+1533353687196	Move compilation unit
+1533406870289	Extract method 'inicializarDadosPadroes'
+1533408358129	Rename local variable 'locacao'
+1533408606475	Rename method 'possuiNegativaco'

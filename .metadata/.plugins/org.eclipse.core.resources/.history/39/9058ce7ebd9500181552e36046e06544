@@ -1,0 +1,17 @@
+package br.com.glauber.servicos;
+
+import org.junit.Test;
+
+public class OrdemExecucaoTest {
+	
+	@Test
+	public void inica() {
+		System.out.println();
+	}
+	
+	@Test
+	public void verifica() {
+		
+	}
+
+}

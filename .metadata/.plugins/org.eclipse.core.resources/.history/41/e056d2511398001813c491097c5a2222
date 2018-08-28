@@ -1,0 +1,34 @@
+package br.com.glauber.builder;
+
+import java.util.Date;
+import java.util.List;
+
+import br.com.glauber.entidades.Filme;
+import br.com.glauber.entidades.Locacao;
+import br.com.glauber.entidades.Usuario;
+
+public class LocacaoBuilder {
+	
+	private Locacao locacao;
+	
+	private LocacaoBuilder() {
+		
+	}
+	
+	public static LocacaoBuilder umaLocacao() {
+		LocacaoBuilder builder = new LocacaoBuilder();
+		builder.locacao = new Locacao();
+		builder.locacao.setFilmes(null);
+		builder.locacao.setUsuario(null);
+		builder.locacao.setDataLocacao(null);
+		builder.locacao.setDataRetorno(null);
+		
+		Double valor = 0d;
+		
+		return this;
+	}
+	
+	public Locacao agora() {
+		return this;
+	}
+}

@@ -1,0 +1,5 @@
+package com.glauber.junit5.service;
+
+public class CalculatorTest {
+
+}

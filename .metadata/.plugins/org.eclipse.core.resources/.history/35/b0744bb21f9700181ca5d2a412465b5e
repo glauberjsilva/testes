@@ -1,0 +1,12 @@
+package br.com.glauber.builder;
+
+import br.com.glauber.entidades.Usuario;
+
+public class UsuarioBuilder {
+	
+	private Usuario usuario;
+	private UsuarioBuilder() {}
+	
+	private static UsuarioBuilder umUsuario() {  }
+	
+}

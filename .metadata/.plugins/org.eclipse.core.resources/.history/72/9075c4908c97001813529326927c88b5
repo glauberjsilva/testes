@@ -1,0 +1,22 @@
+package br.com.glauber.matchers;
+
+import java.util.Date;
+
+import org.hamcrest.Description;
+import org.hamcrest.TypeSafeMatcher;
+
+public class DiaSemanaMatcher extends TypeSafeMatcher {
+
+	@Override
+	public void describeTo(Description description) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected boolean matchesSafely(Date item) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

@@ -1,0 +1,7 @@
+package br.com.glauber.servicos;
+
+import br.com.glauber.builder.UsuarioBuilder;
+
+public class SPCService {
+	public boolena possuiNegativaco(Usuario usuario);
+}

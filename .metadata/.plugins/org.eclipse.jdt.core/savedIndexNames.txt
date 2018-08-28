@@ -1,0 +1,3 @@
+INDEX VERSION 1.131+D:\Desenvolvimento\Projetos\workspace_estudos\workspace_teste_udemy\.metadata\.plugins\org.eclipse.jdt.core
+93936117.index
+3924229942.index

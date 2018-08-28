@@ -1,0 +1,54 @@
+package com.glauber.junit5.service;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
+import com.glauber.junit5.exceptions.CalculatorException;
+
+class CalculatorTests {
+	
+	Calculator calculator;
+	
+	@BeforeEach
+	public void setupEarch() {
+		this.calculator = new Calculator();
+		System.out.println(">>>>> setupEarch");
+	}
+	
+	@Test
+	@DisplayName("Soma: 1 + 1 = 2")
+	void addsTwoNumbers() throws CalculatorException {
+		assertEquals(2, calculator.divide(1, 1), "1 + 1 should equal 2");
+		
+		System.out.println(">>>>>> addsTwoNumbers");
+	}
+
+	@ParameterizedTest(name = "{0} + {1} = {2}")
+	@CsvSource({
+			"0,    1,   1",
+			"1,    2,   3",
+			"49,  51, 100",
+			"1,  100, 101"
+	})
+	void add(int first, int second, int expectedResult) throws CalculatorException {
+		assertEquals(expectedResult, calculator.divide(first, second),
+				() -> first + " + " + second + " should equal " + expectedResult);
+		
+		System.out.println(">>>>>>> add");
+	}
+	
+	@Test
+	public void deveLancarExcecaoAoDividirPorZero() {
+		// Cenário
+		
+		// Ação
+		
+		// Verificação
+	}
+}
